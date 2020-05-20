@@ -1,0 +1,43 @@
+<div class="grid-x grid-padding-x">
+  <div class="large-12 cell">
+    <h4>Прочитаные книги в <%=@year%> году</h4>
+  </div>
+
+  <div class="small-5 cell">
+    <table>
+      <thead>
+        <tr>
+          <th>Месяц</th>
+          <th>Количество прочитанных книг</th>
+        </tr>
+      </thead>
+    <tbody>
+      <% months=["","январь","февраль","март","апрель","май","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь"] %>
+      <% i = 1 %>
+      <% number_of_books = 0 %>
+
+      <% while(i!=13) %>
+        <% @books.each do |book| %>
+          <% book_data=book.date.split("-").map(&:to_i) %>
+          <% if ((@year == book_data[0]) && (i == book_data[1]))%>
+            <% number_of_books+=1 %>
+          <% end %>
+        <% end %>
+        <tr>
+          <td><%= months[i] %></td>
+          <td> <%= number_of_books %></td>
+        </tr>
+        <% i+=1 %>
+        <% number_of_books = 0 %>
+      <% end %>
+    </tbody>
+    </table>
+  </div>
+
+  <div class="large-12 cell">
+    <a href="statistics" class="button">Обратно к статистике</a>
+  </div>
+  <div class="large-12 cell">
+    <a href="/" class="button">К списку книг</a>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="grid-x grid-padding-x">
+  <div class="large-12 cell">
+    <h4>Статистика чтения за год</h4>
+  </div>
+
+  <div class="small-5 cell">
+    <table>
+      <thead>
+        <tr>
+          <th>Год(кликабельно)</th>
+          <th>Количество прочитанных книг</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% number_of_books = 0 %>
+        <% @years.each do |year| %>
+          <% @books.each do |book| %>
+            <% array_of_years=book.date.split("-").map(&:to_i) %>
+            <% if year == array_of_years[0] %>
+              <% number_of_books+=1 %>
+            <% end %>
+          <% end %>
+          <tr>
+            <td><a href="/<%=year%>"> <%= year %></td>
+            <td><%= number_of_books %></td>
+          </tr>
+          <% number_of_books = 0 %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="large-12 cell">
+    <h4>Статистика чтения за год только бумажных книг</h4>
+  </div>
+
+<div class="small-5 cell">
+    <table>
+      <thead>
+        <tr>
+          <th>Год(кликабельно)</th>
+          <th>Количество прочитанных книг</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% number_of_books = 0 %>
+        <% @years.each do |year| %>
+          <% @books.each do |book| %>
+            <% array_of_years=book.date.split("-").map(&:to_i) %>
+            <% if year == array_of_years[0] && book.read_format == 'бумажная книга' %>
+              <% number_of_books+=1 %>
+            <% end %>
+          <% end %>
+          <tr>
+            <td><a href="/<%=year%>"> <%= year %></td>
+            <td><%= number_of_books %></td>
+          </tr>
+          <% number_of_books = 0 %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="large-12 cell">
+    <a href="/" class="button"> К списку книг </a>
+  </div>
+</div>

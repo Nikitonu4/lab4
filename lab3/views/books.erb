@@ -1,0 +1,65 @@
+<div class="grid-x grid-padding-x">
+  <div class="large-12 cell">
+    <h4>Список книг</h4>
+  </div>
+
+  <form method="get">
+      <div class="grid-x grid-padding-x">
+        <% unless @params[:errors].empty? %>
+          <div class="large-12 cell callout warning">
+            <p>
+              Параметры фильтра введены неверно, данные не были отфильтрованы
+            </p>
+            <ul>
+              <% @params[:errors].each do |error| %> 
+                <li><%= error %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+      
+      
+        <div class="large-6 cell">
+          <label>Формат чтения
+            <input type="text" placeholder="бумажная книга" name="read_format" value="<%= @params[:read_format] %>">
+          </label>
+        </div>
+        <div class="large-12 cell">
+          <input type="submit" value="Фильтровать" class="button">
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+  <div class="large-12 cell">
+    <table>
+      <thead>
+        <tr>
+          <th>Дата прочтения</th>
+          <th>Название книги</th>
+          <th>Оценка</th>
+          <th>Формат чтения</th>
+        </tr>
+      </thead>
+    <tbody>
+      <% @books.each do |book| %>
+      <tr>
+        <td><%= book.date %></td>
+        <td><%= book.author %> "<%= book.name %>"</td>
+        <td><%= book.mark %></td>
+        <td><%= book.read_format %></td>
+      </tr>
+      <% end %>
+    </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="grid-x grid-padding-x">
+  <div class="large-6 cell">
+    <a href="new" class="button">Добавить книгу</a>
+    <a href="statistics" class="button">Статистика</a>
+  </div>
+</div>
